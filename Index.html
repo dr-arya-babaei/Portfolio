@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arya Babaei — Design Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--black:#0D0D0D;
+--white:#FFFFFF;
+--gray-bg:#F7F7F5;
+--gray-border:#E8E8E8;
+--gray-mid:#555;
+--gray-light:#888;
+--gray-dark:#1A1A1A;
+
+--hsbc-red:#DB2B2B;
+--hsbc-red-light:#FDEAEA;
+--hsbc-red-mid:#F5A0A0;
+
+--enbridge-teal:#0A5F55;
+--enbridge-teal-light:#E0F0EE;
+--enbridge-teal-mid:#7BBFB9;
+
+--bb-amber:#B86A00;
+--bb-amber-light:#FDF3E3;
+--bb-amber-mid:#F0B870;
+
+--green:#1A6B35;
+--green-light:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);line-height:1.6;font-size:15px;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);padding:0 48px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--white);font-weight:500}
+.nav-logo span{font-style:italic;opacity:.6;font-size:13px;margin-left:8px}
+.nav-links{display:flex;gap:8px}
+.nav-link{font-size:12px;font-weight:500;color:rgba(255,255,255,.5);padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .2s;border:1px solid transparent;letter-spacing:.02em}
+.nav-link:hover{color:var(--white);border-color:rgba(255,255,255,.15)}
+.nav-link.active{color:var(--white);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)}
+
+/* PAGES */
+.page{display:none;min-height:100vh;padding-top:60px}
+.page.active{display:block}
+
+/* ===== HOME ===== */
+.home-hero{background:var(--black);color:var(--white);min-height:calc(100vh - 60px);display:flex;flex-direction:column;justify-content:center;padding:80px 64px;position:relative;overflow:hidden}
+.home-hero::before{content:'';position:absolute;top:-120px;right:-80px;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,.05)}
+.home-hero::after{content:'';position:absolute;bottom:-80px;left:40%;width:300px;height:300px;border-radius:50%;border:1px solid rgba(255,255,255,.03)}
+.home-eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px}
+.home-hero h1{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;line-height:1.05;max-width:700px;margin-bottom:24px}
+.home-hero h1 em{font-style:italic;color:rgba(255,255,255,.45)}
+.home-sub{font-size:17px;color:rgba(255,255,255,.5);max-width:520px;line-height:1.7;margin-bottom:56px}
+.home-creds{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:64px}
+.home-cred{font-size:12px;font-weight:500;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:6px 14px;border-radius:20px}
+.home-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px}
+.home-case{border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;background:rgba(255,255,255,.03)}
+.home-case::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;border-radius:14px}
+.home-case.hsbc::before{background:rgba(219,43,43,.06)}
+.home-case.enbridge::before{background:rgba(10,95,85,.08)}
+.home-case.bb::before{background:rgba(184,106,0,.06)}
+.home-case:hover{border-color:rgba(255,255,255,.18);transform:translateY(-3px)}
+.home-case:hover::before{opacity:1}
+.case-dot{width:10px;height:10px;border-radius:50%;margin-bottom:20px}
+.hsbc .case-dot{background:var(--hsbc-red)}
+.enbridge .case-dot{background:var(--enbridge-teal)}
+.bb .case-dot{background:var(--bb-amber)}
+.home-case h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--white);margin-bottom:6px;line-height:1.2}
+.home-case p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.5;margin-bottom:20px}
+.case-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.case-tag{font-size:10px;font-weight:500;padding:3px 9px;border-radius:10px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4)}
+.case-arrow{font-size:12px;color:rgba(255,255,255,.3);transition:all .2s}
+.home-case:hover .case-arrow{color:var(--white);transform:translateX(4px)}
+.case-metric{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:2px}
+.hsbc .case-metric{color:var(--hsbc-red)}
+.enbridge .case-metric{color:var(--enbridge-teal-mid)}
+.bb .case-metric{color:var(--bb-amber-mid)}
+.case-metric-label{font-size:11px;color:rgba(255,255,255,.3)}
+
+/* ===== CASE STUDY SHARED ===== */
+.cs-hero{padding:72px 64px 64px;position:relative;overflow:hidden}
+.cs-back{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;cursor:pointer;margin-bottom:40px;padding:7px 16px;border-radius:20px;border:1px solid var(--gray-border);color:var(--gray-mid);transition:all .2s;background:var(--white)}
+.cs-back:hover{background:var(--gray-bg);color:var(--black)}
+.cs-eyebrow{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.cs-hero h1{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;line-height:1.1;max-width:680px;margin-bottom:16px}
+.cs-hero-sub{font-size:16px;color:var(--gray-mid);max-width:540px;line-height:1.7;margin-bottom:48px}
+.cs-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--gray-border);border-radius:12px;overflow:hidden;max-width:700px}
+.cs-stat{background:var(--gray-bg);padding:20px 24px}
+.cs-stat-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:4px}
+.cs-stat-label{font-size:11px;color:var(--gray-light);line-height:1.4}
+
+.ctx-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:28px 64px;background:var(--gray-bg);border-top:1px solid var(--gray-border);border-bottom:1px solid var(--gray-border)}
+.ctx-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-light);margin-bottom:5px}
+.ctx-val{font-size:13px;font-weight:500;color:var(--black);line-height:1.4}
+
+.cs-body{max-width:860px;margin:0 auto;padding:0 64px}
+.cs-section{padding:56px 0;border-bottom:1px solid var(--gray-border)}
+.cs-section:last-child{border-bottom:none}
+.s-eye{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-light);margin-bottom:10px}
+.s-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;margin-bottom:10px;line-height:1.2}
+.s-lead{font-size:15px;color:var(--gray-mid);line-height:1.75;max-width:620px;margin-bottom:32px}
+
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.prob-card{border:1px solid var(--gray-border);border-radius:12px;padding:22px;background:var(--white)}
+.prob-card h4{font-size:13px;font-weight:500;margin-bottom:6px}
+.prob-card p{font-size:13px;color:var(--gray-mid);line-height:1.6}
+.prob-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.prob-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8}
+
+.metric-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.mpill{border-radius:8px;padding:10px 16px;display:flex;flex-direction:column}
+.mpill-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1}
+.mpill-label{font-size:11px;color:var(--gray-mid);margin-top:3px}
+
+.pillar{margin-bottom:40px}
+.pillar:last-child{margin-bottom:0}
+.p-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:16px}
+.p-num{width:36px;height:36px;border-radius:50%;background:var(--black);color:var(--white);font-family:'Playfair Display',serif;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.p-num-title h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:3px}
+.p-num-title p{font-size:12px;color:var(--gray-light)}
+.p-body{padding-left:54px}
+.p-body p{font-size:14px;color:var(--gray-mid);line-height:1.75;margin-bottom:14px}
+.p-body p:last-child{margin-bottom:0}
+
+.kpi-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
+.kpi-tbl th{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-light);padding:8px 14px;background:var(--gray-bg);border:1px solid var(--gray-border);text-align:left}
+.kpi-tbl td{padding:10px 14px;border:1px solid var(--gray-border);color:var(--gray-mid);vertical-align:top}
+.kpi-tbl td:first-child{font-weight:500;color:var(--black);width:220px}
+.kpi-tbl tr:hover td{background:var(--gray-bg)}
+
+.insight-box{border-radius:12px;padding:26px 30px;margin:24px 0;position:relative;overflow:hidden}
+.insight-box::before{content:'"';font-family:'Playfair Display',serif;font-size:100px;position:absolute;top:-15px;left:12px;line-height:1;opacity:.12}
+.insight-box p{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;line-height:1.6;position:relative;z-index:1}
+
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.oc{background:var(--gray-bg);border-radius:10px;padding:18px;border:1px solid var(--gray-border)}
+.oc-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1;margin-bottom:5px}
+.oc-label{font-size:12px;color:var(--gray-mid);line-height:1.4}
+.oc-base{font-size:11px;color:var(--gray-light);margin-top:3px}
+
+.jd-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.jd-tag{font-size:11px;font-weight:500;padding:4px 11px;border-radius:14px}
+
+.story-quote{border-radius:0 8px 8px 0;padding:14px 18px;margin:18px 0}
+.story-quote p{font-size:14px;line-height:1.7;font-style:italic}
+
+/* HSBC COLORS */
+.hsbc-accent{color:var(--hsbc-red)}
+.hsbc-bg{background:var(--hsbc-red-light)}
+.hsbc-border{border-color:var(--hsbc-red-mid)}
+.hsbc-prob-icon{background:var(--hsbc-red-light)}
+.hsbc-prob-icon svg{stroke:var(--hsbc-red)}
+.hsbc-mpill{background:var(--hsbc-red-light);border:1px solid var(--hsbc-red-mid)}
+.hsbc-mpill .mpill-num{color:var(--hsbc-red)}
+.hsbc-insight{background:var(--black);color:var(--white)}
+.hsbc-insight::before{color:var(--hsbc-red)}
+.hsbc-insight p span{color:var(--hsbc-red)}
+.hsbc-quote{border-left:3px solid var(--hsbc-red);background:var(--hsbc-red-light)}
+.hsbc-quote p{color:var(--gray-dark)}
+.hsbc-pos{color:var(--green)}
+.hsbc-neg{color:var(--hsbc-red)}
+.hsbc-hero{background:linear-gradient(135deg,#0D0D0D 0%,#1a0505 100%)}
+.hsbc-eye{color:var(--hsbc-red)}
+.hsbc-stat-num{color:var(--hsbc-red)}
+
+/* ENBRIDGE COLORS */
+.enb-accent{color:var(--enbridge-teal)}
+.enb-bg{background:var(--enbridge-teal-light)}
+.enb-border{border-color:var(--enbridge-teal-mid)}
+.enb-prob-icon{background:var(--enbridge-teal-light)}
+.enb-prob-icon svg{stroke:var(--enbridge-teal)}
+.enb-mpill{background:var(--enbridge-teal-light);border:1px solid var(--enbridge-teal-mid)}
+.enb-mpill .mpill-num{color:var(--enbridge-teal)}
+.enb-insight{background:var(--black);color:var(--white)}
+.enb-insight p span{color:var(--enbridge-teal-mid)}
+.enb-quote{border-left:3px solid var(--enbridge-teal);background:var(--enbridge-teal-light)}
+.enb-pos{color:var(--green)}
+.enb-hero{background:linear-gradient(135deg,#0D0D0D 0%,#011f1c 100%)}
+.enb-eye{color:var(--enbridge-teal)}
+.enb-stat-num{color:var(--enbridge-teal)}
+
+/* BB COLORS */
+.bb-accent{color:var(--bb-amber)}
+.bb-bg{background:var(--bb-amber-light)}
+.bb-border{border-color:var(--bb-amber-mid)}
+.bb-prob-icon{background:var(--bb-amber-light)}
+.bb-prob-icon svg{stroke:var(--bb-amber)}
+.bb-mpill{background:var(--bb-amber-light);border:1px solid var(--bb-amber-mid)}
+.bb-mpill .mpill-num{color:var(--bb-amber)}
+.bb-insight{background:var(--black);color:var(--white)}
+.bb-insight p span{color:var(--bb-amber-mid)}
+.bb-quote{border-left:3px solid var(--bb-amber);background:var(--bb-amber-light)}
+.bb-pos{color:var(--green)}
+.bb-hero{background:linear-gradient(135deg,#0D0D0D 0%,#1f1000 100%)}
+.bb-eye{color:var(--bb-amber)}
+.bb-stat-num{color:var(--bb-amber)}
+
+/* FOOTER */
+footer{background:var(--black);color:rgba(255,255,255,.4);padding:32px 64px;display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:64px}
+footer strong{color:rgba(255,255,255,.8);font-weight:500}
+
+@media(max-width:768px){
+nav{padding:0 20px}
+.home-hero{padding:48px 24px}
+.home-hero h1{font-size:38px}
+.home-cases{grid-template-columns:1fr}
+.cs-hero{padding:48px 24px 40px}
+.cs-hero h1{font-size:32px}
+.cs-stats{grid-template-columns:repeat(2,1fr)}
+.ctx-strip{padding:20px 24px;grid-template-columns:repeat(2,1fr)}
+.cs-body{padding:0 24px}
+.prob-grid{grid-template-columns:1fr}
+.outcome-grid{grid-template-columns:repeat(2,1fr)}
+footer{padding:24px;flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Arya Babaei <span>Design Portfolio</span></div>
+  <div class="nav-links">
+    <div class="nav-link active" onclick="showPage('home')">Home</div>
+    <div class="nav-link" onclick="showPage('hsbc')">HSBC Canada</div>
+    <div class="nav-link" onclick="showPage('enbridge')">Enbridge</div>
+    <div class="nav-link" onclick="showPage('bb')">Brown & Brown</div>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+  <div class="home-hero">
+    <div class="home-eyebrow">Director of Digital Design · Financial Services</div>
+    <h1>Designing for people who make <em>consequential</em> decisions with real money.</h1>
+    <p class="home-sub">Ten years leading design in financial services — banking, investment, wealth management, insurance, and enterprise finance.</p>
+    <div class="home-creds">
+      <span class="home-cred">PhD — Human-Centered Design</span>
+      <span class="home-cred">DBA — Innovation Management</span>
+      <span class="home-cred">PMP · CSM · CBAP</span>
+      <span class="home-cred">MIT AI Certification</span>
+    </div>
+    <div class="home-cases">
+      <div class="home-case hsbc" onclick="showPage('hsbc')">
+        <div class="case-dot"></div>
+        <div class="case-metric">+43pts</div>
+        <div class="case-metric-label">Investment NPS swing</div>
+        <h3 style="margin-top:16px">HSBC Canada</h3>
+        <p>Rebuilt the complete retail banking & investment platform from zero during the pandemic.</p>
+        <div class="case-tags">
+          <span class="case-tag">Investment Banking</span>
+          <span class="case-tag">Trading Workflow</span>
+          <span class="case-tag">Design System</span>
+        </div>
+        <div class="case-arrow">View case study →</div>
+      </div>
+      <div class="home-case enbridge" onclick="showPage('enbridge')">
+        <div class="case-dot"></div>
+        <div class="case-metric">89%</div>
+        <div class="case-metric-label">Platform adoption in 3 months</div>
+        <h3 style="margin-top:16px">Enbridge</h3>
+        <p>Zero-to-one enterprise financial platform — 9 modules, 100+ component design system, AI-integrated workflows.</p>
+        <div class="case-tags">
+          <span class="case-tag">Enterprise Finance</span>
+          <span class="case-tag">AI Research</span>
+          <span class="case-tag">Design Systems</span>
+        </div>
+        <div class="case-arrow">View case study →</div>
+      </div>
+      <div class="home-case bb" onclick="showPage('bb')">
+        <div class="case-dot"></div>
+        <div class="case-metric">470+</div>
+        <div class="case-metric-label">Interfaces redesigned</div>
+        <h3 style="margin-top:16px">Brown & Brown</h3>
+        <p>Consumer financial services platform redesign — claims workflow, policy management, design system from scratch.</p>
+        <div class="case-tags">
+          <span class="case-tag">Insurance</span>
+          <span class="case-tag">Claims Workflow</span>
+          <span class="case-tag">Consumer Finance</span>
+        </div>
+        <div class="case-arrow">View case study →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HSBC CASE STUDY ===== -->
+<div class="page" id="page-hsbc">
+  <div class="cs-hero hsbc-hero" style="color:white">
+    <div style="max-width:900px;margin:0 auto;padding:0 64px">
+      <div class="cs-back" onclick="showPage('home')" style="color:#888;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)">← Back to portfolio</div>
+      <div class="cs-eyebrow hsbc-eye">Case Study · Apr 2020 — Dec 2022</div>
+      <h1 class="cs-hero" style="font-family:'Playfair Display',serif;font-size:48px;font-weight:700;line-height:1.1;max-width:680px;margin-bottom:16px;color:white;padding:0">Rebuilding HSBC Canada's <span style="color:var(--hsbc-red)">Investment Banking</span> Experience</h1>
+      <p class="cs-hero-sub" style="color:rgba(255,255,255,.5)">A zero-to-one design transformation — from fragmented platform to unified investment intelligence for 500,000+ monthly users during the pandemic.</p>
+      <div class="cs-stats" style="border-color:rgba(255,255,255,.1)">
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num hsbc-stat-num">+43pts</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Investment NPS swing</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num hsbc-stat-num">89%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Trading completion rate</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num hsbc-stat-num">−50%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">User complaints</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num hsbc-stat-num">+18%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Revenue per investor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctx-strip">
+    <div><div class="ctx-label">Company</div><div class="ctx-val">HSBC Bank Canada</div></div>
+    <div><div class="ctx-label">Role</div><div class="ctx-val">Head of Product Design & UX Research</div></div>
+    <div><div class="ctx-label">Team built</div><div class="ctx-val">7 designers — UX, UI, Research, Content</div></div>
+    <div><div class="ctx-label">Platform scale</div><div class="ctx-val">500,000+ monthly active users</div></div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-section">
+      <div class="s-eye">Context</div>
+      <div class="s-title">A platform under pressure</div>
+      <p class="s-lead">April 2020. Pandemic hits. Branches close overnight. The digital platform becomes the only channel for half a million Canadians managing mortgages, credit, and investments. No design team. No research program. No design system. Everything built from scratch.</p>
+      <div class="insight-box hsbc-insight">
+        <p>HSBC Canada was <span>acquired by RBC in 2024.</span> The 780,000 retail customers rebuilt through this work are now RBC customers — the platform I designed for them is directly relevant to what RBC Direct Investing is building today.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">The problem</div>
+      <div class="s-title">Fragmented experience. Broken trust.</div>
+      <p class="s-lead">Every feature technically worked. But the end-to-end investment journey was broken at every handoff.</p>
+      <div class="metric-row">
+        <div class="mpill hsbc-mpill"><span class="mpill-num">61%</span><span class="mpill-label">Trading completion</span></div>
+        <div class="mpill hsbc-mpill"><span class="mpill-num">55%</span><span class="mpill-label">Portfolio abandonment</span></div>
+        <div class="mpill hsbc-mpill"><span class="mpill-num">7 min</span><span class="mpill-label">Avg. trade time</span></div>
+        <div class="mpill hsbc-mpill"><span class="mpill-num">20%</span><span class="mpill-label">Feature discovery</span></div>
+        <div class="mpill hsbc-mpill"><span class="mpill-num">−12</span><span class="mpill-label">Investment NPS</span></div>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-card">
+          <div class="prob-icon hsbc-prob-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg></div>
+          <h4>Fragmented CX journey</h4>
+          <p>Portfolio, market data, trading, and performance metrics across four disconnected surfaces with no shared context.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon hsbc-prob-icon"><svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+          <h4>Broken trading workflow</h4>
+          <p>11 steps to execute a trade. No market context. No inline education. Anxiety-inducing confirmation. 4 in 10 trades abandoned.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon hsbc-prob-icon"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
+          <h4>Zero portfolio intelligence</h4>
+          <p>P&L, adjusted cost base, time-weighted return — all buried. Users built personal spreadsheets to reconcile their own money.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon hsbc-prob-icon"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+          <h4>No investor education</h4>
+          <p>TFSA room unused. RRSP optimization ignored. Tax loss harvesting unknown. The capability existed — design wasn't surfacing it.</p>
+        </div>
+      </div>
+      <div class="story-quote hsbc-quote">
+        <p>"One user had a spreadsheet she updated manually every week because she didn't trust the platform's view of her own money. These were engaged investors who had completely given up on the product."</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">Design pillars</div>
+      <div class="s-title">Three layers. One north star.</div>
+      <p class="s-lead">Make users feel like smarter investors every time they open the platform.</p>
+
+      <div class="pillar">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--hsbc-red)">1</div>
+          <div class="p-num-title"><h3>Portfolio intelligence</h3><p>Unified view — real-time P&L, cost base, attribution, allocation</p></div>
+        </div>
+        <div class="p-body">
+          <p>Rebuilt the investment home around one idea — answer the three questions every investor asks at login. How am I doing. What's changed. Do I need to act. Real-time valuation, daily P&L, unrealized gains, adjusted cost base, performance attribution by sector, asset allocation ring chart. All in one surface. Progressive disclosure — summary visible immediately, detail on expansion.</p>
+        </div>
+        <table class="kpi-tbl">
+          <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Portfolio abandonment</td><td>55%</td><td>21%</td><td style="color:var(--green)">↓ 34pts</td></tr>
+            <tr><td>Feature discovery</td><td>20%</td><td>58%</td><td style="color:var(--green)">↑ 38pts</td></tr>
+            <tr><td>Avg. session depth</td><td>1.2 screens</td><td>4.2 min</td><td style="color:var(--green)">↑ 67%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pillar" style="margin-top:40px">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--hsbc-red)">2</div>
+          <div class="p-num-title"><h3>Confident execution</h3><p>Trading workflow — 11 steps to 5, gamified financial literacy</p></div>
+        </div>
+        <div class="p-body">
+          <p>Rebuilt around one concept — every touchpoint actively reduces anxiety. Five steps instead of eleven. Persistent real-time bid-ask spread throughout the entire flow. Inline contextual education at every decision point — market orders, limit orders, stop-loss, trailing stops — surfaced in the moment of doing. Portfolio impact preview before confirmation. Execution card showing price, slippage, and immediate impact. First-ever watchlist-to-trade flow.</p>
+        </div>
+        <table class="kpi-tbl">
+          <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Trading completion</td><td>61%</td><td>89%</td><td style="color:var(--green)">↑ 28pts</td></tr>
+            <tr><td>Avg. trade time</td><td>7 min</td><td>2.3 min</td><td style="color:var(--green)">↓ 67%</td></tr>
+            <tr><td>Order cancellation</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↓ 34%</td></tr>
+            <tr><td>Investment NPS</td><td>−12</td><td>+31</td><td style="color:var(--green)">↑ 43pts</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pillar" style="margin-top:40px">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--hsbc-red)">3</div>
+          <div class="p-num-title"><h3>Investor intelligence layer</h3><p>Behavioral nudges, financial health score, tax optimization</p></div>
+        </div>
+        <div class="p-body">
+          <p>Embedded education and behavioral nudges surfaced contextually within the normal investment journey. TFSA contribution gaps, tax loss harvesting prompts, rebalancing signals — all triggered by behavior, not buried in a learn section. Financial Health Score showing diversification quality, registered account optimization, cash drag ratio, and risk alignment.</p>
+        </div>
+        <table class="kpi-tbl">
+          <thead><tr><th>Metric</th><th>Outcome</th><th>Timeframe</th></tr></thead>
+          <tbody>
+            <tr><td>TFSA utilization</td><td style="color:var(--green)">↑ 28%</td><td>6 months post-launch</td></tr>
+            <tr><td>Cross-product engagement</td><td style="color:var(--green)">↑ 34%</td><td>Banking + investment</td></tr>
+            <tr><td>Revenue per investor</td><td style="color:var(--green)">↑ 18%</td><td>Account optimization</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">Overall outcomes — 2 years</div>
+      <div class="s-title">What actually changed</div>
+      <div class="outcome-grid">
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+12pts</div><div class="oc-label">Platform NPS</div><div class="oc-base">Overall platform</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--hsbc-red)">−50%</div><div class="oc-label">User complaints</div><div class="oc-base">Support volume</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+20%</div><div class="oc-label">User retention</div><div class="oc-base">30-day retention</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+15%</div><div class="oc-label">Task completion</div><div class="oc-base">All core workflows</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+17%</div><div class="oc-label">CSAT score</div><div class="oc-base">Customer satisfaction</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+43pts</div><div class="oc-label">Investment NPS</div><div class="oc-base">−12 to +31</div></div>
+      </div>
+      <div class="insight-box hsbc-insight" style="margin-top:28px">
+        <p>Six months after launch, the investor who had maintained a personal spreadsheet for years told us she <span>"hadn't opened it in three months."</span> That's the metric that mattered most.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div><strong>Arya Babaei</strong> PhD, DBA, MDes — Director, Digital Design</div>
+    <div>Prepared for RBC Director, Digital Design · Self-Directed Investing</div>
+  </footer>
+</div>
+
+<!-- ===== ENBRIDGE CASE STUDY ===== -->
+<div class="page" id="page-enbridge">
+  <div class="cs-hero enb-hero" style="color:white">
+    <div style="max-width:900px;margin:0 auto;padding:0 64px">
+      <div class="cs-back" onclick="showPage('home')" style="color:#888;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)">← Back to portfolio</div>
+      <div class="cs-eyebrow enb-eye">Case Study · Jan 2024 — Present · KPMG Canada</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:48px;font-weight:700;line-height:1.1;max-width:680px;margin-bottom:16px;color:white">AI-Integrated <span style="color:var(--enbridge-teal-mid)">Enterprise Financial Platform</span> — Enbridge</h1>
+      <p style="font-size:16px;color:rgba(255,255,255,.5);max-width:540px;line-height:1.7;margin-bottom:48px">Zero-to-one design for a 9-module enterprise financial platform — design vision, AI-integrated research, 100+ component design system, 89% adoption in 3 months.</p>
+      <div class="cs-stats" style="border-color:rgba(255,255,255,.1)">
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num enb-stat-num">+35%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Task completion rate</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num enb-stat-num">89%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Platform adoption — 3 months</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num enb-stat-num">−32%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Workflow cycle time</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num enb-stat-num">−27%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Manual overhead</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctx-strip">
+    <div><div class="ctx-label">Company</div><div class="ctx-val">Enbridge via KPMG Canada</div></div>
+    <div><div class="ctx-label">Role</div><div class="ctx-val">Design Director — AI-Integrated Platform</div></div>
+    <div><div class="ctx-label">Scope</div><div class="ctx-val">9 modules · 100+ components · v1→v2→v3</div></div>
+    <div><div class="ctx-label">Research</div><div class="ctx-val">80+ interviews · 4 usability rounds</div></div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-section">
+      <div class="s-eye">Context</div>
+      <div class="s-title">Nine modules. One platform. Zero coherence.</div>
+      <p class="s-lead">Enbridge needed a complete enterprise financial platform built from zero — 9 modules, hundreds of workflows, users from frontline operators to CFO-level executives. Every business unit had a different definition of what the platform should do. No shared design language. No coherent user experience. No design system.</p>
+      <div class="insight-box enb-insight">
+        <p>The core insight from stakeholder research — every business unit described the same problem in different language. Users were <span>drowning in data but starving for insight.</span> That became the design north star for the entire platform.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">The problem</div>
+      <div class="s-title">Data everywhere. Decisions nowhere.</div>
+      <div class="metric-row">
+        <div class="mpill enb-mpill"><span class="mpill-num">9</span><span class="mpill-label">Disconnected modules</span></div>
+        <div class="mpill enb-mpill"><span class="mpill-num">0</span><span class="mpill-label">Shared design language</span></div>
+        <div class="mpill enb-mpill"><span class="mpill-num">Low</span><span class="mpill-label">Initial task completion</span></div>
+        <div class="mpill enb-mpill"><span class="mpill-num">Manual</span><span class="mpill-label">Research synthesis — 2 weeks</span></div>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-card">
+          <div class="prob-icon enb-prob-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg></div>
+          <h4>No coherent platform vision</h4>
+          <p>9 modules built independently with no shared interaction language, information architecture, or visual system.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon enb-prob-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <h4>Research bottleneck</h4>
+          <p>80+ user interviews generating insights too slowly. Findings arriving after decisions were already made — too late to influence.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon enb-prob-icon"><svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+          <h4>No design system</h4>
+          <p>Every module built ad hoc. No shared components. Engineering translating designs manually — slow, inconsistent, expensive.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon enb-prob-icon"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <h4>Multi-segment user complexity</h4>
+          <p>Frontline operators, mid-level managers, and CFO-level executives — all on the same platform with conflicting mental models and needs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">Design approach</div>
+      <div class="s-title">From data to decision — the platform north star.</div>
+      <p class="s-lead">Every module, surface, and component evaluated against one question — does this help someone make a better decision faster, or does it just give them more information?</p>
+
+      <div class="pillar">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--enbridge-teal)">1</div>
+          <div class="p-num-title"><h3>AI-integrated research pipeline</h3><p>LLM-assisted synthesis — 2 weeks to 2 days</p></div>
+        </div>
+        <div class="p-body">
+          <p>80+ user interviews across all user segments. The traditional synthesis process was a bottleneck — 2 weeks of manual affinity mapping meant insights arrived after decisions were closed. Implemented LLM-assisted synthesis using Claude — structured analysis prompts processing interview transcripts, identifying patterns, contradictions, and priority themes. Research cycle cut from 2 weeks to 2 days. 4 usability rounds across v1, v2, v3 releases with insights feeding directly into sprint planning.</p>
+        </div>
+      </div>
+
+      <div class="pillar" style="margin-top:36px">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--enbridge-teal)">2</div>
+          <div class="p-num-title"><h3>Signal · Context · Action framework</h3><p>Concept architecture governing all 9 modules</p></div>
+        </div>
+        <div class="p-body">
+          <p>Defined a three-layer concept architecture as the design constitution for the entire platform. Signal — the most important information surfaced immediately with clear visual hierarchy. Context — background needed to understand the signal. Action — next step made obvious and frictionless. Every component, every interaction pattern, every piece of UX writing evaluated against this framework. Frontline operators responded to Signal. Executives needed Context. Everyone needed Action.</p>
+        </div>
+      </div>
+
+      <div class="pillar" style="margin-top:36px">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--enbridge-teal)">3</div>
+          <div class="p-num-title"><h3>100+ component design system</h3><p>Co-owned with engineering from token level</p></div>
+        </div>
+        <div class="p-body">
+          <p>Built a 100+ component library with full Figma variables, dev mode specs, and complete documentation. Engineering brought in at the token level from day one — not after the fact. Components built to handle financial data density across all 9 module types. Result: engineers implementing directly, not translating. Adoption hit 89% within 3 months because the handoff friction was essentially zero.</p>
+        </div>
+        <table class="kpi-tbl">
+          <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Task completion rate</td><td>Baseline</td><td>+35%</td><td style="color:var(--green)">↑ 35%</td></tr>
+            <tr><td>Workflow cycle time</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↓ 32%</td></tr>
+            <tr><td>Manual overhead</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↓ 27%</td></tr>
+            <tr><td>Platform adoption</td><td>0%</td><td>89%</td><td style="color:var(--green)">3 months post-launch</td></tr>
+            <tr><td>Research synthesis cycle</td><td>2 weeks</td><td>2 days</td><td style="color:var(--green)">↓ 85%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">Overall outcomes</div>
+      <div class="s-title">What the numbers said</div>
+      <div class="outcome-grid">
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+35%</div><div class="oc-label">Task completion rate</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">89%</div><div class="oc-label">Adoption in 3 months</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">−32%</div><div class="oc-label">Workflow cycle time</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">−27%</div><div class="oc-label">Manual overhead</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">−85%</div><div class="oc-label">Research synthesis time</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--enbridge-teal)">100+</div><div class="oc-label">Design system components</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div><strong>Arya Babaei</strong> PhD, DBA, MDes — Director, Digital Design</div>
+    <div>Prepared for RBC Director, Digital Design · Self-Directed Investing</div>
+  </footer>
+</div>
+
+<!-- ===== BROWN & BROWN CASE STUDY ===== -->
+<div class="page" id="page-bb">
+  <div class="cs-hero bb-hero" style="color:white">
+    <div style="max-width:900px;margin:0 auto;padding:0 64px">
+      <div class="cs-back" onclick="showPage('home')" style="color:#888;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)">← Back to portfolio</div>
+      <div class="cs-eyebrow bb-eye">Case Study · May 2021 — Dec 2023 · SIA Partners USA</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:48px;font-weight:700;line-height:1.1;max-width:680px;margin-bottom:16px;color:white">Consumer Financial Platform — <span style="color:var(--bb-amber-mid)">Brown & Brown Insurance</span></h1>
+      <p style="font-size:16px;color:rgba(255,255,255,.5);max-width:540px;line-height:1.7;margin-bottom:48px">Complete redesign of a consumer financial services platform — 470+ interfaces, 35 user flows, full design system, continuous UX research embedded throughout delivery.</p>
+      <div class="cs-stats" style="border-color:rgba(255,255,255,.1)">
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num bb-stat-num">470+</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Interfaces redesigned</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num bb-stat-num">−18%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Claim processing errors</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num bb-stat-num">+30%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">User satisfaction score</div>
+        </div>
+        <div class="cs-stat" style="background:rgba(255,255,255,.04)">
+          <div class="cs-stat-num bb-stat-num">−25%</div>
+          <div class="cs-stat-label" style="color:rgba(255,255,255,.4)">Workflow cycle time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctx-strip">
+    <div><div class="ctx-label">Company</div><div class="ctx-val">Brown & Brown Insurance</div></div>
+    <div><div class="ctx-label">Role</div><div class="ctx-val">Design Director — Consumer Financial Platform</div></div>
+    <div><div class="ctx-label">Scope</div><div class="ctx-val">470+ interfaces · 35 user flows</div></div>
+    <div><div class="ctx-label">Delivery</div><div class="ctx-val">Design system built from scratch</div></div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-section">
+      <div class="s-eye">Context</div>
+      <div class="s-title">Users in their worst moments.</div>
+      <p class="s-lead">Insurance is unique as a design context — users come to the platform when something has gone wrong. They've had an accident, a loss, a crisis. They're stressed, confused, and the last thing they need is a complicated system standing between them and resolution. The existing platform was making a hard moment harder.</p>
+      <div class="insight-box bb-insight">
+        <p>The core research insight — users weren't making errors because the interface was confusing. They were making errors because they were <span>anxious.</span> That single reframe changed the entire concept direction.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">The problem</div>
+      <div class="s-title">Complexity at the worst possible moment.</div>
+      <div class="metric-row">
+        <div class="mpill bb-mpill"><span class="mpill-num">High</span><span class="mpill-label">Claim processing errors</span></div>
+        <div class="mpill bb-mpill"><span class="mpill-num">Low</span><span class="mpill-label">User satisfaction</span></div>
+        <div class="mpill bb-mpill"><span class="mpill-num">Long</span><span class="mpill-label">Workflow cycle time</span></div>
+        <div class="mpill bb-mpill"><span class="mpill-num">0</span><span class="mpill-label">Shared design system</span></div>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-card">
+          <div class="prob-icon bb-prob-icon"><svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+          <h4>Black box claims experience</h4>
+          <p>Users submitted claims and waited with zero visibility into status, progress, or next steps. Anxiety peaked during the wait — errors concentrated here.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon bb-prob-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+          <h4>System-centric information architecture</h4>
+          <p>Platform organized around how the insurance company processes claims — not how a stressed human being thinks about their situation.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon bb-prob-icon"><svg viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div>
+          <h4>Fragmented platform — 470+ screens</h4>
+          <p>Built feature by feature with no coherent design language. Every screen a one-off. Changes slow, inconsistent, and expensive.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon bb-prob-icon"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h4>Long processing cycles</h4>
+          <p>Manual workflows, unclear ownership, and poor task clarity creating long cycle times for both users and internal teams.</p>
+        </div>
+      </div>
+      <div class="story-quote bb-quote">
+        <p>"Users weren't failing because the interface was hard to use. They were failing because they were scared and the platform gave them no signals that everything was going to be okay."</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">Design approach</div>
+      <div class="s-title">Claim Clarity — radical transparency at the worst moment.</div>
+      <p class="s-lead">Every user should know exactly where their claim is, what's happening right now, what comes next, and what if anything they need to do — not as a status page, but as the primary surface of the entire experience.</p>
+
+      <div class="pillar">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--bb-amber)">1</div>
+          <div class="p-num-title"><h3>Emotional journey mapping</h3><p>Research built around anxiety, not just usability</p></div>
+        </div>
+        <div class="p-body">
+          <p>Recruited users who had filed claims within the last 30 days. Conducted emotional journey mapping — not just what steps did you take but what were you feeling at each step. What scared you. Where did you feel lost. Where did the system feel like it was working against you. That research revealed the anxiety concentration points that traditional usability testing would have missed entirely.</p>
+        </div>
+      </div>
+
+      <div class="pillar" style="margin-top:36px">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--bb-amber)">2</div>
+          <div class="p-num-title"><h3>Claim Clarity concept</h3><p>Radical transparency as the primary design principle</p></div>
+        </div>
+        <div class="p-body">
+          <p>Rebuilt the claims experience around three pillars — milestone visualization showing the claim's journey through stages as the primary UI surface, proactive communication reaching out to users before they needed to reach out to us, and decision support surfacing exactly what information was needed at exactly the right moment. All three integrated into a single coherent experience — not three separate features bolted together.</p>
+        </div>
+      </div>
+
+      <div class="pillar" style="margin-top:36px">
+        <div class="p-head">
+          <div class="p-num" style="background:var(--bb-amber)">3</div>
+          <div class="p-num-title"><h3>Design system from scratch</h3><p>470+ interfaces · 35 user flows · full component library</p></div>
+        </div>
+        <div class="p-body">
+          <p>Built a complete design system from zero covering all 470+ interfaces across 35 user flows. Led and mentored the design team throughout delivery — embedded continuous UX research at every sprint, drove alignment with Product, Engineering, and leadership. The design system became the single source of truth that made the scale of this engagement manageable.</p>
+        </div>
+        <table class="kpi-tbl">
+          <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Claim processing errors</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↓ 18%</td></tr>
+            <tr><td>Workflow cycle time</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↓ 25%</td></tr>
+            <tr><td>Task completion rate</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↑ 20%</td></tr>
+            <tr><td>User satisfaction score</td><td>Baseline</td><td>—</td><td style="color:var(--green)">↑ 30%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="s-eye">Overall outcomes</div>
+      <div class="s-title">What changed for users</div>
+      <div class="outcome-grid">
+        <div class="oc"><div class="oc-num" style="color:var(--green)">−18%</div><div class="oc-label">Claim processing errors</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">−25%</div><div class="oc-label">Workflow cycle time</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+20%</div><div class="oc-label">Task completion rate</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--green)">+30%</div><div class="oc-label">User satisfaction</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--bb-amber)">470+</div><div class="oc-label">Interfaces redesigned</div></div>
+        <div class="oc"><div class="oc-num" style="color:var(--bb-amber)">35</div><div class="oc-label">User flows rebuilt</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div><strong>Arya Babaei</strong> PhD, DBA, MDes — Director, Digital Design</div>
+    <div>Prepared for RBC Director, Digital Design · Self-Directed Investing</div>
+  </footer>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const map={home:0,hsbc:1,enbridge:2,bb:3};
+  document.querySelectorAll('.nav-link')[map[id]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
